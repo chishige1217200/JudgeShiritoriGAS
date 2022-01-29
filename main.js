@@ -65,12 +65,13 @@ function judge() {
     let w1, w2;
 
     for (let i = 1; i < lastRow; i++) {
+        if (sheet.getRange(i + 1, 1, 1, 1).getValue() === 'True') continue; // 軽量化
         w1 = sheet.getRange(i, 1, 1, 1).getValue();
         w1 = convert2katakana(w1); // カタカナに変換
         w2 = sheet.getRange(i + 1, 1, 1, 1).getValue();
         w2 = convert2katakana(w2); // カタカナに変換
         //console.log(wordIndex.lastIndexOf(w2));
-        if (w2.slice(-1) === 'ン' || wordIndex.lastIndexOf(w2) !== i) {
+        if (w2.slice(-1) === 'ン' || wordIndex.indexOf(w2) !== i) {
             sheet.getRange(i + 1, 2, 1, 1).setValue('GAME OVER').setHorizontalAlignment('center').setFontColor('black'); // Game Overを書き込み
             return;
         }
