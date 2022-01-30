@@ -36,6 +36,7 @@ function judge() {
         console.log(tail + " " + head);
         if (tail.slice(-1) === 'ー') {
             if (tail.slice(tail.length - 2, tail.length - 1) === head.slice(0, 1)) return true; // 末尾が伸ばし棒のとき，1つ前の文字で
+            else if (tail.slice(tail.length - 3, tail.length - 1) === head.slice(0, 2)) return true;
         }
         else if (isYoon(tail.slice(-1))) {
             if (tail.slice(tail.length - 2, tail.length) === head.slice(0, 2))
@@ -65,7 +66,7 @@ function judge() {
     let w1, w2;
 
     for (let i = 1; i < lastRow; i++) {
-        if (sheet.getRange(i + 1, 2, 1, 1).getValue() === true) {
+        if (sheet.getRange(i + 1, 2, 1, 1).getValue() === true && i !== lastRow - 1) {
             console.log('continue');
             continue; // 軽量化
         }
